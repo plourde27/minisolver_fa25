@@ -1,28 +1,12 @@
 import json
 
 inperson = [
-    "brain of a tourist, hands of a cone",
-    "512 Pounds",
-    "how to get more points???",
-    "Maomao Fanclub",
-    "OF!Z",
-    "MaLin",
-    "ice evaders",
-    "BISV",
-    "Sigma Coders",
-    "Fire Nation",
-    "DVCC 2028",
-    "The Infinite Loops",
-    "future mcdonalds workers",
-    "USACO Silver Demons",
-    "3 idiots",
-    "temporary team name",
-    "chicken jockey",
-    "Flint and Steel",
-    "Class E",
-    "Hacking the Beanstalk",
-    "nullptr"
+    "CCA Conspiracy",
+    "mathforcesbox",
+    " JOT"
 ]
+
+problems = ["oreo_final_main", "caliconstruction_final_main", "scv_final_main", "fortnite_final_main", "bridge_final_main", "bridge_final_bonus", "literally1984_final_main", "literally1984_final_bonus_1", "literally1984_final_bonus_2", "reservoir_final_main", "reservoir_final_bonus", "celeste_final_main", "celeste_final_bonus", "explorer_final_main", "explorer_final_bonus", "vector_final_main", "torreznos_final_main"]
 
 file = open("submissions.json", "r").read()
 subs = json.loads(file)
@@ -36,7 +20,11 @@ team = json.loads(file3)
 teams = {}
 
 for t in team:
-    id = int(t["id"])
+    id = 0
+    if "-" in list(t["id"]):
+        id = int(t["id"].split("-")[1])
+    else:
+        id = int(t["id"])
     name = t["name"]
 
     if name not in inperson:
@@ -64,8 +52,12 @@ mp = 1000000000
 xp = 0
 
 for s in subs:
-    tid = int(s['team_id'])
-    pid = int(s['problem_id'])
+    tid = 0
+    if "-" in list(s['team_id']):
+        tid = int(s['team_id'].split("-")[1])
+    else:
+        tid = int(s['team_id'])
+    pid = problems.index(s['problem_id'])
     mp = min(pid, mp)
     xp = max(pid, xp)
 
@@ -84,9 +76,16 @@ for team in teams:
 
 freeze = 120
 
+print(teams)
+
 for s in subs:
-    tid = int(s['team_id'])
-    pid = int(s['problem_id']) - mp
+    tid = 0
+    if "-" in list(s['team_id']):
+        tid = int(s['team_id'].split("-")[1])
+    else:
+        tid = int(s['team_id'])
+    name = t["name"]
+    pid = problems.index(s['problem_id'])
     sid = int(s['id'])
     time = s['contest_time'].split(":")
     hour = int(time[0])

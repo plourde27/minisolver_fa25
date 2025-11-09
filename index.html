@@ -502,9 +502,9 @@ window.onload = function() {
                                   }
                               }
 
-                              window.gold = 21;
-                              window.silver = 21
-                              window.bronze = 21;
+                              window.gold = 10;
+                              window.silver = 10;
+                              window.bronze = 10;
 
                               if (window.mode == 1) {
                                 while (window.place >= window.silver) {
@@ -550,7 +550,6 @@ function init() {
 }
 
 async function honorTick() {
-  console.log(window.doneHonor);
   if (window.doneHonor == -2) {
     document.getElementById("start").style = "display: none;"
     document.getElementById("leaderboard").style = "display: block;"
