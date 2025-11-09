@@ -4,7 +4,7 @@ In Sp25 and later semesters, the DOMJudge event feed tool (not made by us) unfor
 
 ## Updated Setup
 [NOTE: there are a lot of ways that we could make this setup process easier for future contests]
-1. Find the contest ID. This will be "dj-[number]" (for fa25, this is "dj-29")
+1. Find the contest ID. This will be "dj-[number]"
 2. Go to https://calicojudge.com/api/v4/contests/[contest id]/submissions and paste the JSON into the "submissions.json" file
 3. Go to https://calicojudge.com/api/v4/contests/[contest id]/judgements and paste the JSON into the "judgements.json" file
 4. Go to https://calicojudge.com/api/v4/contests/[contest id]/teams and paste the JSON into the "teams.json" file
