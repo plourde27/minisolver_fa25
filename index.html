@@ -52,8 +52,8 @@
 <div class="container-fluid text-center" id="intro">    
   <div class="row content">
     <div class="col-sm-12 text-left"> 
-      <center><h1 style="font-size: 80px;"><b>Fall 2024</b></h1><img src="bricks.png" width="1000"></center> <!-- TODO change to the current semester -->
-      <center><h2 style="font-size: 60px;"><b><i>Results Ceremony</i></b></h1></center>
+      <center><h1 style="font-size: 80px;"><b>Spring 2025</b></h1><img src="bricks.png" width="1000"></center> <!-- TODO change to the current semester -->
+      <center><h2 style="font-size: 60px;"><b><i>Resuslts Ceremony</i></b></h1></center>
       <br>
       <center><button id="startButton" onclick="init()"><a href="#start"><span style="font-size: 32px;">Start</span></a></button></center>
     </div>
@@ -119,8 +119,8 @@ window.mode = 2; /* TODO set this to 1 if you want just Bronze teams to be honor
 
 
 window.leaderboard = []; 
-window.problemScores = [5, 5, 5, 7, 5, 3, 3, 4, 5, 4, 6, 4, 6, 4, 7, 13, 14]; /* TODO scores for each problem in order (including all subparts separately) */
-window.nSubparts = [1, 1, 1, 1, 2, 3, 2, 2, 2, 1, 1]; /* TODO number of subparts for each main problem */
+window.problemScores = [4, 4, 5, 5, 6, 2, 5, 3, 5, 4, 5, 9, 3, 6, 10, 12, 12]; /* TODO scores for each problem in order (including all subparts separately) */
+window.nSubparts = [1, 2, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1]; /* TODO number of subparts for each main problem */
 window.nProblems = window.nSubparts.reduce((partialSum, a) => partialSum + a, 0);
 
 
@@ -360,7 +360,7 @@ function resolveTick() {
 
         var currTeam = window.leaderboard[window.place];
         var header = [];
-        switch (nonCollegePlace()) {
+        /*switch (nonCollegePlace()) {
           case 1:
             header.push("1st Place HS");
             break;
@@ -378,36 +378,36 @@ function resolveTick() {
             break;
           default:
             break;
-        }
+        }*/
 
         switch (window.place) {
           case 0:
-            header.push("1st Place Overall");
+            header.push("1st Place In-Person");
             break;
           case 1:
-            header.push("2nd Place Overall");
+            header.push("2nd Place In-Person");
             break;
           case 2:
-            header.push("3rd Place Overall");
+            header.push("3rd Place In-Person");
             break;
           case 3:
-            header.push("4th Place Overall");
+            header.push("4th Place In-Person");
             break;
           case 4:
-            header.push("5th Place Overall");
+            header.push("5th Place In-Person");
             break;
           default:
             break;
 
         }
 
-        if (bestCollege()) {
+        /*if (bestCollege()) {
           header.push("Best College Team");
         }
 
         if (bestInPerson()) {
           header.push("Best In-Person Team");
-        }
+        }*/
 
         document.getElementById("prize1").innerHTML = header.join(", ");
         document.getElementById("prize2").textContent = currTeam.name;
@@ -485,9 +485,10 @@ window.onload = function() {
   $(document).ready(async function() {
                       $.ajax({
                           type: "GET",
-                          url: "resolver-output.txt",
+                          url: "resolver_output.txt",
                           dataType: "text",
                           success: async function(data) {
+                            
                               var lines = data.split("\n");
                               window.place = lines.length - 1;
                               for (var i = 0; i < lines.length; i++) {
@@ -500,9 +501,10 @@ window.onload = function() {
                                     competedTeams++;
                                   }
                               }
-                              window.gold = Math.floor(competedTeams / 12);
-                              window.silver = Math.floor(competedTeams / 6);
-                              window.bronze = Math.floor(competedTeams / 3);
+
+                              window.gold = 21;
+                              window.silver = 21
+                              window.bronze = 21;
 
                               if (window.mode == 1) {
                                 while (window.place >= window.silver) {
@@ -516,8 +518,8 @@ window.onload = function() {
                               } 
                               document.getElementById("startButton").style = "display: block;"
                               window.honorPlace = window.bronze;
-                              document.getElementById("startTitle").innerHTML = "Bronze Brick Teams";
-                              document.getElementById("startSub").textContent = "Places " + window.bronze + " to " + (window.silver + 1);
+                              document.getElementById("startTitle").innerHTML = "In-Person Results";
+                              document.getElementById("startSub").textContent = "";//Places " + window.bronze + " to " + (window.silver + 1);
                           }
                       });
                     });
@@ -559,7 +561,7 @@ async function honorTick() {
   if (window.honorPlace <= window.gold) {
     console.log("case 1");
     window.doneHonor = -2;
-    document.getElementById("startTitle").innerHTML = "Gold Brick Teams";
+    document.getElementById("startTitle").innerHTML = "In-Person Results";
     document.getElementById("startSub").textContent = "Places " + window.gold + " to 1";
     document.getElementById("start").style = "display: block;"
     document.getElementById("honorRoll").style = "display: none;"

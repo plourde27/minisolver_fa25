@@ -166,6 +166,7 @@ for j, judging in pending_judgements.items():
 
 output = []
 for k, v in all_teams.items():
+
     line = []
     line.append(str(v.is_college))
     line.append(str(v.is_inperson))

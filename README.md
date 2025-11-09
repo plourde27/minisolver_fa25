@@ -1,7 +1,19 @@
 # MiniSolver
-MiniSolver is made with love by tonsi
+MiniSolver is made with love by tonsi and later updated for Sp25 by plourde27
+In Sp25 and later semesters, the DOMJudge event feed tool (not made by us) unfortunately stopped working, so I implemented an alternative method to directly pull from submission and judgement data.
 
-## Setup
+## Updated Setup
+[NOTE: there are a lot of ways that we could make this setup process easier for future contests]
+1. Find the contest ID. This will be "dj-[number]" (for fa25, this is "dj-29")
+2. Go to https://calicojudge.com/api/v4/contests/[contest id]/submissions and paste the JSON into the "submissions.json" file
+3. Go to https://calicojudge.com/api/v4/contests/[contest id]/judgements and paste the JSON into the "judgements.json" file
+4. Go to https://calicojudge.com/api/v4/contests/[contest id]/teams and paste the JSON into the "teams.json" file
+4. Go to the scoreboard and find all the teams that are in-person. Manually paste each of the team names into the "inperson" dict in minisolver2.py (yes, there is definitely a better way to do this lol but I can't remember how I did it last semester and since there's only ~50 in-person teams it should probably work to just do it manually)
+5. In a terminal window, cd into the minisolver directory and run "python minisolver2.py >> resolver_output.txt".
+6. On lines 122 and 123 of index.html, update window.problemScores and window.nSubparts with the scores and number of subparts for each problem of the current contest, respectively
+7. Run the frontend locally, i.e. run "python -m http.server 8000" and open "0.0.0.0:8000/index.html" and follow the instructions onscreen to play the resolver during the ceremony
+
+## Historical Setup [No longer works from sp25 onward due to the icpctools app breaking]
 During (or even before) the contest, update the **minisolver.py** script and the **index.html** webpage by changing every line marked with TODO to match the details for the current contest. All the information should be available on DOMjudge without the contest having begun.
 
 Once the contest is over, before running the resolver, you'll need to get the event feed. This should be done using the standard ICPC resolver (https://github.com/icpctools/icpctools/tree/main/Resolver), with the following steps:
